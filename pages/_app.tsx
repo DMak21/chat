@@ -7,11 +7,17 @@ import type { WithAuthenticatorProps } from '@aws-amplify/ui-react';
 
 Amplify.configure(config);
 
-function App({signOut, user }: WithAuthenticatorProps) {
+interface AppProps extends WithAuthenticatorProps {
+    Component: any,
+    pageProps: any
+}
+
+function App({ Component, pageProps, signOut, user }: AppProps) {
   return (
     <>
       <h1>Hello {user?.username}</h1>
       <button onClick={signOut}>Sign out</button>
+      <Component {...pageProps} />
     </>
   );
 }
